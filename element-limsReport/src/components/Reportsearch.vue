@@ -214,7 +214,10 @@ export default {
       // 检测项目
       tsetInfoVisible: false,
       //传入子组件的选中的订单编号
-      clickTestInfo: null
+      clickTestInfo: {
+        "experimentOrderId" : null,
+        "experimentCode":null
+      }
     };
   },
   components: {
@@ -389,7 +392,9 @@ export default {
 
     // 展示检测项目详细信息
     showTestInfo(row) {
-      this.clickTestInfo = row.experimentOrderId;
+      // this.clickTestInfo = row.experimentOrderId;
+      this.clickTestInfo.experimentOrderId = row.experimentOrderId;
+      this.clickTestInfo.experimentCode = row.experimentCode;
       console.log(this.clickTestInfo+"父");
       this.tsetInfoVisible = true;
     },

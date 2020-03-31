@@ -121,7 +121,7 @@ export default {
     },
     getTestInfo(){
       console.log("zi"+this.clickTestInfo);
-      this.$axios.get('/api/experiment/order/getInfo',{params:{'experimentOrderId':this.clickTestInfo}})
+      this.$axios.get('/api/experiment/order/getInfo',{params:{'experimentOrderId':this.clickTestInfo.experimentOrderId}})
         .then(res => {
           this.testInfo = res.data.data
         })
@@ -130,7 +130,7 @@ export default {
         })
     },
     getResult(){
-      this.$axios.get('/api/experiment/result/list',{params:{'experimentOrderId':this.clickTestInfo}})
+      this.$axios.get('/api/experiment/result/list',{params:{'experimentCode':this.clickTestInfo.experimentCode}})
         .then(res => {
           console.log(res.data)
         })
