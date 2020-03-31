@@ -1,0 +1,291 @@
+{
+  "state" : 0,
+  "data" : [
+    {
+      "reportId":"1",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"2",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"3",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"4",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"5",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"6",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"7",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"8",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"9",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"10",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"11",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"12",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"13",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"14",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"15",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"16",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"17",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"18",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"19",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"20",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"21",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"22",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"23",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"24",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"25",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-10 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"张三",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"下载",
+      "dealingPeople":"徐辉",
+      "status":"已上传"
+    },
+    {
+      "reportId":"26",
+      "testingItem":"肺8全靶向指南版",
+      "finishTime":"2020-03-11 12:00:00",
+      "reportTime":"2020-03-11 12:00:00",
+      "userName":"李四",
+      "hospital":"南京鼓楼医院",
+      "evaluationReport":"",
+      "dealingPeople":"",
+      "status":"待分配"
+    }
+  ]
+}
