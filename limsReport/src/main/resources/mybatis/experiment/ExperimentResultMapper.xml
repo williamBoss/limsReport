@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.experiment.mapper.ExperimentResultMapper">
+
+  <sql id="Base_Column_List">
+    result_id,
+      experiment_code,
+      order_code,
+      `status`,
+      del_flag,
+      experiment_order_id,
+      `name`,
+      `key`,
+      `value`,
+      create_time,
+      update_time
+  </sql>
+  <resultMap type="com.lims.project.experiment.domain.ExperimentResult" id="ExperimentResultResult">
+    <result property="resultId" column="result_id"/>
+    <result property="experimentCode" column="experiment_code"/>
+    <result property="orderCode" column="order_code"/>
+    <result property="status" column="status"/>
+    <result property="delFlag" column="del_flag"/>
+    <result property="experimentOrderId" column="experiment_order_id"/>
+    <result property="name" column="name"/>
+    <result property="key" column="key"/>
+    <result property="value" column="value"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+  </resultMap>
+
+  <sql id="selectExperimentResultVo">
+    select result_id,
+           experiment_code,
+           order_code,
+           `status`,
+           del_flag,
+           experiment_order_id,
+           `name`,
+           `key`,
+           `value`,
+           create_time,
+           update_time
+    from t_experiment_result
+  </sql>
+
+  <select id="selectExperimentResultList" parameterType="com.lims.project.experiment.domain.ExperimentResult"
+    resultMap="ExperimentResultResult">
+    <include refid="selectExperimentResultVo"/>
+    <where>
+      <if test="resultId != null ">and result_id = #{resultId}</if>
+      <if test="experimentCode != null  and experimentCode != ''">and experiment_code = #{experimentCode}</if>
+      <if test="orderCode != null  and orderCode != ''">and order_code = #{orderCode}</if>
+      <if test="experimentOrderId != null ">and experiment_order_id = #{experimentOrderId}</if>
+    </where>
+  </select>
+
+  <select id="selectExperimentResultById" parameterType="Long" resultMap="ExperimentResultResult">
+    <include refid="selectExperimentResultVo"/>
+    where result_id = #{resultId}
+  </select>
+
+  <insert id="insertExperimentResult" parameterType="com.lims.project.experiment.domain.ExperimentResult"
+    useGeneratedKeys="true" keyProperty="resultId">
+    insert into t_experiment_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="experimentCode != null  and experimentCode != ''">experiment_code,</if>
+      <if test="orderCode != null  and orderCode != ''">order_code,</if>
+      <if test="status != null ">`status`,</if>
+      <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+      <if test="experimentOrderId != null and orderCode != ''">experiment_order_id,</if>
+      <if test="name != null  and name != ''">`name`,</if>
+      <if test="key != null  and key != ''">`key`,</if>
+      <if test="value != null  and value != ''">`value`,</if>
+      <if test="createTime != null ">create_time,</if>
+      <if test="updateTime != null ">update_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="experimentCode != null  and experimentCode != ''">#{experimentCode},</if>
+      <if test="orderCode != null  and orderCode != ''">#{orderCode},</if>
+      <if test="status != null ">#{status},</if>
+      <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+      <if test="experimentOrderId != null ">#{experimentOrderId},</if>
+      <if test="name != null  and name != ''">#{name},</if>
+      <if test="key != null  and key != ''">#{key},</if>
+      <if test="value != null  and value != ''">#{value},</if>
+      <if test="createTime != null ">#{createTime},</if>
+      <if test="updateTime != null ">#{updateTime},</if>
+    </trim>
+  </insert>
+
+  <update id="updateExperimentResult" parameterType="com.lims.project.experiment.domain.ExperimentResult">
+    update t_experiment_result
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="experimentCode != null  and experimentCode != ''">experiment_code = #{experimentCode},</if>
+      <if test="orderCode != null  and orderCode != ''">order_code = #{orderCode},</if>
+      <if test="status != null ">status = #{status},</if>
+      <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+      <if test="experimentOrderId != null ">experiment_order_id = #{experimentOrderId},</if>
+      <if test="name != null  and name != ''">name = #{name},</if>
+      <if test="key != null  and key != ''">key = #{key},</if>
+      <if test="value != null  and value != ''">value = #{value},</if>
+      <if test="createTime != null ">create_time = #{createTime},</if>
+      <if test="updateTime != null ">update_time = #{updateTime},</if>
+    </trim>
+    where result_id = #{resultId}
+  </update>
+
+  <delete id="deleteExperimentResultById" parameterType="Long">
+    delete
+    from t_experiment_result
+    where result_id = #{resultId}
+  </delete>
+
+  <delete id="deleteExperimentResultByIds" parameterType="String">
+    delete from t_experiment_result where result_id in
+    <foreach item="resultId" collection="array" open="(" separator="," close=")">
+      #{resultId}
+    </foreach>
+  </delete>
+  <!--根据服务单号删除检测信息-->
+  <update id="updateDelFlag" parameterType="String">
+    update t_experiment_result
+    set del_flag = '2'
+    where experiment_code = #{experimentCode}
+  </update>
+
+  <!--实验结果-->
+  <select id="selectAllByExperimentCodeAndDelFlag" resultMap="ExperimentResultResult">
+    select
+    <include refid="Base_Column_List"/>
+    from t_experiment_result
+    <where>
+      <if test="experimentCode != null and experimentCode != ''">
+        and experiment_code=#{experimentCode}
+      </if>
+      <if test="delFlag != null and delFlag != ''">
+        and del_flag=#{delFlag}
+      </if>
+    </where>
+  </select>
+
+</mapper>

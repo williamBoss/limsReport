@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.experiment.mapper.ExperimentOrderMapper">
+
+  <resultMap type="com.lims.project.experiment.domain.OrderInfoDto" id="ExperimentOrderResult">
+    <result property="experimentOrderId" column="experiment_order_id"/>
+    <result property="experimentCode" column="experiment_code"/>
+    <result property="goodsCode" column="goods_code"/>
+    <result property="goodsName" column="goods_name"/>
+    <result property="oldtestCode" column="oldTest_code"/>
+    <result property="orderCode" column="order_code"/>
+    <result property="status" column="status"/>
+    <result property="templateCode" column="template_code"/>
+    <result property="templateName" column="template_name"/>
+    <result property="templateVersion" column="template_version"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="clinicalInfo" column="clinical_info"/>
+    <result property="department" column="department"/>
+    <result property="doctorEmail" column="doctor_email"/>
+    <result property="doctorName" column="doctor_name"/>
+    <result property="doctorPhone" column="doctor_phone"/>
+    <result property="expressNumber" column="express_number"/>
+    <result property="histologicOrigin" column="histologic_origin"/>
+    <result property="histologicPosition" column="histologic_position"/>
+    <result property="hospitalName" column="hospital_name"/>
+    <result property="managerEmail" column="manager_email"/>
+    <result property="reportreceptionAddress" column="reportReception_address"/>
+    <result property="reportreceptionEmail" column="reportReception_email"/>
+    <result property="reportreceptionName" column="reportReception_name"/>
+    <result property="reportreceptionPhone" column="reportReception_phone"/>
+    <result property="salerEmail" column="saler_email"/>
+    <result property="salerName" column="saler_name"/>
+    <result property="salerPhone" column="saler_phone"/>
+    <result property="timeSampling" column="time_sampling"/>
+    <result property="patientAge" column="patient_age"/>
+    <result property="patientName" column="patient_name"/>
+    <result property="patientPhone" column="patient_phone"/>
+    <result property="patientGender" column="patient_gender"/>
+    <result property="userId" column="user_id"/>
+    <result property="leaderCreateTime" column="leader_create_time"/>
+    <result property="leaderUpdateTime" column="leader_update_time"/>
+    <result property="leaderStatus" column="leader_status"/>
+    <result property="delFlag" column="del_flag"/>
+    <result property="orderSort" column="order_sort"/>
+    <result property="userName" column="user_name"/>
+    <result property="nodeKey" column="node_key"/>
+  </resultMap>
+  <!--查询返回给前端页面的实体对象-->
+  <resultMap type="ExperimentOrderVo" id="resultOrderVo">
+    <result property="experimentOrderId" column="experiment_order_id"/>
+    <result property="experimentCode" column="experiment_code"/>
+    <result property="goodsName" column="goods_name"/>
+    <result property="orderCode" column="order_code"/>
+    <result property="hospitalName" column="hospital_name"/>
+    <result property="managerEmail" column="manager_email"/>
+    <result property="salerEmail" column="saler_email"/>
+    <result property="salerName" column="saler_name"/>
+    <result property="timeSampling" column="time_sampling"/>
+    <result property="patientName" column="patient_name"/>
+    <result property="leaderStatus" column="leader_status"/>
+    <result property="userName" column="user_name"/>
+    <result property="nodeKey" column="node_key"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="salerPhone" column="saler_phone"/>
+    <result property="reportreceptionAddress" column="reportReception_address"/>
+    <result property="reportreceptionEmail" column="reportReception_email"/>
+    <result property="reportreceptionName" column="reportReception_name"/>
+    <result property="reportreceptionPhone" column="reportReception_phone"/>
+    <result property="patientPhone" column="patient_phone"/>
+    <result property="patientGender" column="patient_gender"/>
+    <result property="userId" column="user_id"/>
+    <result property="department" column="department"/>
+    <result property="doctorEmail" column="doctor_email"/>
+    <result property="doctorName" column="doctor_name"/>
+    <result property="doctorPhone" column="doctor_phone"/>
+    <result property="expressNumber" column="express_number"/>
+    <result property="histologicOrigin" column="histologic_origin"/>
+    <result property="histologicPosition" column="histologic_position"/>
+    <result property="patientAge" column="patient_age"/>
+    <result property="clinicalInfo" column="clinical_info"/>
+    <result property="leaderUpdateTime" column="leader_update_time"/>
+  </resultMap>
+
+  <sql id="selectExperimentOrderVo">
+    select experiment_order_id,
+           experiment_code,
+           goods_code,
+           goods_name,
+           oldTest_code,
+           order_code,
+           status,
+           template_code,
+           template_name,
+           template_version,
+           update_time,
+           clinical_info,
+           department,
+           doctor_email,
+           doctor_name,
+           doctor_phone,
+           express_number,
+           histologic_origin,
+           histologic_position,
+           hospital_name,
+           manager_email,
+           reportReception_address,
+           reportReception_email,
+           reportReception_name,
+           reportReception_phone,
+           saler_email,
+           saler_name,
+           saler_phone,
+           time_sampling,
+           patient_age,
+           patient_name,
+           patient_phone,
+           CASE
+             WHEN (patient_gender = 1)
+               THEN '男'
+             WHEN (patient_gender = 2)
+               THEN '女'
+             ELSE '未知'
+             END AS patient_gender,
+           user_id,
+           leader_create_time,
+           leader_update_time,
+           leader_status,
+           del_flag,
+           order_sort,
+           node_key,
+           user_name
+    from t_experiment_order
+  </sql>
+
+  <select id="selectExperimentOrderList" parameterType="com.lims.project.experiment.domain.OrderInfoDto"
+    resultMap="resultOrderVo">
+    <include refid="selectExperimentOrderVo"/>
+    <where>
+      del_flag=0
+      <if test="identification == 'YSC'">
+        <if test="leaderStatus != null  and leaderStatus != ''">and leader_status=#{leaderStatus}</if>
+        <if test="leaderStatus == null  or leaderStatus == ''">and (leader_status='1' or leader_status='2')</if>
+      </if>
+      <if test="leaderStatus != null  and leaderStatus != '' and identification!='YSC'">and
+        leader_status=#{leaderStatus}
+      </if>
+      <if test="goodsName != null  and goodsName != ''">and goods_name = #{goodsName}</if>
+      <if test="orderCode != null  and orderCode != ''">and order_code = #{orderCode}</if>
+      <if test="patientName != null  and patientName != ''">and patient_name like concat('%', #{patientName}, '%')</if>
+      <if test="userId != null and userId!=''">and user_id = #{userId}</if>
+      <if test="salerName != null  and salerName!=''">and saler_name = #{salerName}</if>
+      <if test="hospitalName != null and hospitalName!='' ">and hospital_name = #{hospitalName}</if>
+      <if test="(start != null and start!='' )  and (end!=null and end!='')">and
+        leader_update_time between #{start} and #{end}
+      </if>
+    </where>
+    <if test="orderSort== 1 ">ORDER BY update_time ASC</if>
+    <if test="orderSort== 2 ">ORDER BY time_sampling ASC</if>
+  </select>
+
+  <select id="selectExperimentOrderById" parameterType="Long" resultMap="resultOrderVo">
+    <include refid="selectExperimentOrderVo"/>
+    where experiment_order_id = #{experimentOrderId}
+  </select>
+
+  <insert id="insertExperimentOrder" parameterType="com.lims.project.experiment.domain.OrderInfoDto"
+    useGeneratedKeys="true" keyProperty="experimentOrderId">
+    insert into t_experiment_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="experimentCode != null  and experimentCode != ''">experiment_code,</if>
+      <if test="goodsCode != null  and goodsCode != ''">goods_code,</if>
+      <if test="goodsName != null  and goodsName != ''">goods_name,</if>
+      <if test="oldtestCode != null  and oldtestCode != ''">oldtest_code,</if>
+      <if test="orderCode != null  and orderCode != ''">order_code,</if>
+      <if test="status != null ">status,</if>
+      <if test="templateCode != null  and templateCode != ''">template_code,</if>
+      <if test="templateName != null  and templateName != ''">template_name,</if>
+      <if test="templateVersion != null  and templateVersion != ''">template_version,</if>
+      <if test="updateTime != null ">update_time,</if>
+      <if test="orderInfoVo.clinicalInfo != null  and orderInfoVo.clinicalInfo != ''">clinical_info,</if>
+      <if test="orderInfoVo.department != null  and orderInfoVo.department != ''">department,</if>
+      <if test="orderInfoVo.doctorEmail != null  and orderInfoVo.doctorEmail != ''">doctor_email,</if>
+      <if test="orderInfoVo.doctorName != null  and orderInfoVo.doctorName != ''">doctor_name,</if>
+      <if test="orderInfoVo.doctorPhone != null  and orderInfoVo.doctorPhone != ''">doctor_phone,</if>
+      <if test="orderInfoVo.expressNumber != null  and orderInfoVo.expressNumber != ''">express_number,</if>
+      <if test="orderInfoVo.histologicOrigin != null  and orderInfoVo.histologicOrigin != ''">histologic_origin,</if>
+      <if test="orderInfoVo.histologicPosition != null  and orderInfoVo.histologicPosition != ''">histologic_position,
+      </if>
+      <if test="orderInfoVo.hospitalName != null  and orderInfoVo.hospitalName != ''">hospital_name,</if>
+      <if test="orderInfoVo.managerEmail != null  and orderInfoVo.managerEmail != ''">manager_email,</if>
+      <if test="orderInfoVo.reportreceptionAddress != null  and orderInfoVo.reportreceptionAddress != ''">
+        reportReception_address,
+      </if>
+      <if test="orderInfoVo.reportreceptionEmail != null  and orderInfoVo.reportreceptionEmail != ''">
+        reportReception_email,
+      </if>
+      <if test="orderInfoVo.reportreceptionName != null  and orderInfoVo.reportreceptionName != ''">
+        reportReception_name,
+      </if>
+      <if test="orderInfoVo.reportreceptionPhone != null  and orderInfoVo.reportreceptionPhone != ''">
+        reportReception_phone,
+      </if>
+      <if test="orderInfoVo.salerEmail != null  and orderInfoVo.salerEmail != ''">saler_email,</if>
+      <if test="orderInfoVo.salerName != null  and orderInfoVo.salerName != ''">saler_name,</if>
+      <if test="orderInfoVo.salerPhone != null  and orderInfoVo.salerPhone != ''">saler_phone,</if>
+      <if test="orderInfoVo.timeSampling != null ">time_sampling,</if>
+      <if test="orderInfoVo.patientAge != null ">patient_age,</if>
+      <if test="orderInfoVo.patientName != null  and orderInfoVo.patientName != ''">patient_name,</if>
+      <if test="orderInfoVo.patientPhone != null  and orderInfoVo.patientPhone != ''">patient_phone,</if>
+      <if test="orderInfoVo.patientGender != null  and orderInfoVo.patientGender != ''">patient_gender,</if>
+      <if test="orderInfoVo.userId != null ">user_id,</if>
+      <if test="orderInfoVo.leaderCreateTime != null ">leader_create_time,</if>
+      <if test="orderInfoVo.leaderUpdateTime != null ">leader_update_time,</if>
+      <if test="orderInfoVo.leaderStatus != null  and orderInfoVo.leaderStatus != ''">leader_status,</if>
+      <if test="orderInfoVo.delFlag != null  and orderInfoVo.delFlag != ''">del_flag,</if>
+      <if test="orderInfoVo.orderSort != null ">order_sort,</if>
+      <if test="orderInfoVo.userName != null  and orderInfoVo.userName != ''">user_name,</if>
+      <if test="orderInfoVo.nodeKey != null  and orderInfoVo.nodeKey != ''">node_key,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="experimentCode != null  and experimentCode != ''">#{experimentCode},</if>
+      <if test="goodsCode != null  and goodsCode != ''">#{goodsCode},</if>
+      <if test="goodsName != null  and goodsName != ''">#{goodsName},</if>
+      <if test="oldtestCode != null  and oldtestCode != ''">#{oldtestCode},</if>
+      <if test="orderCode != null  and orderCode != ''">#{orderCode},</if>
+      <if test="status != null ">#{status},</if>
+      <if test="templateCode != null  and templateCode != ''">#{templateCode},</if>
+      <if test="templateName != null  and templateName != ''">#{templateName},</if>
+      <if test="templateVersion != null  and templateVersion != ''">#{templateVersion},</if>
+      <if test="updateTime != null ">#{updateTime},</if>
+      <if test="orderInfoVo.clinicalInfo != null  and orderInfoVo.clinicalInfo != ''">#{orderInfoVo.clinicalInfo},</if>
+      <if test="orderInfoVo.department != null  and orderInfoVo.department != ''">#{orderInfoVo.department},</if>
+      <if test="orderInfoVo.doctorEmail != null  and orderInfoVo.doctorEmail != ''">#{orderInfoVo.doctorEmail},</if>
+      <if test="orderInfoVo.doctorName != null  and orderInfoVo.doctorName != ''">#{orderInfoVo.doctorName},</if>
+      <if test="orderInfoVo.doctorPhone != null  and orderInfoVo.doctorPhone != ''">#{orderInfoVo.doctorPhone},</if>
+      <if test="orderInfoVo.expressNumber != null  and orderInfoVo.expressNumber != ''">#{orderInfoVo.expressNumber},
+      </if>
+      <if test="orderInfoVo.histologicOrigin != null  and orderInfoVo.histologicOrigin != ''">
+        #{orderInfoVo.histologicOrigin},
+      </if>
+      <if test="orderInfoVo.histologicPosition != null  and orderInfoVo.histologicPosition != ''">
+        #{orderInfoVo.histologicPosition},
+      </if>
+      <if test="orderInfoVo.hospitalName != null  and orderInfoVo.hospitalName != ''">#{orderInfoVo.hospitalName},</if>
+      <if test="orderInfoVo.managerEmail != null  and orderInfoVo.managerEmail != ''">#{orderInfoVo.managerEmail},</if>
+      <if test="orderInfoVo.reportreceptionAddress != null  and orderInfoVo.reportreceptionAddress != ''">
+        #{orderInfoVo.reportreceptionAddress},
+      </if>
+      <if test="orderInfoVo.reportreceptionEmail != null  and orderInfoVo.reportreceptionEmail != ''">
+        #{reportreceptionEmail},
+      </if>
+      <if test="orderInfoVo.reportreceptionName != null  and orderInfoVo.reportreceptionName != ''">
+        #{orderInfoVo.reportreceptionName},
+      </if>
+      <if test="orderInfoVo.reportreceptionPhone != null  and orderInfoVo.reportreceptionPhone != ''">
+        #{orderInfoVo.reportreceptionPhone},
+      </if>
+      <if test="orderInfoVo.salerEmail != null  and orderInfoVo.salerEmail != ''">#{orderInfoVo.salerEmail},</if>
+      <if test="orderInfoVo.salerName != null  and orderInfoVo.salerName != ''">#{orderInfoVo.salerName},</if>
+      <if test="orderInfoVo.salerPhone != null  and orderInfoVo.salerPhone != ''">#{orderInfoVo.salerPhone},</if>
+      <if test="orderInfoVo.timeSampling != null ">#{orderInfoVo.timeSampling},</if>
+      <if test="orderInfoVo.patientAge != null ">#{orderInfoVo.patientAge},</if>
+      <if test="orderInfoVo.patientName != null  and orderInfoVo.patientName != ''">#{orderInfoVo.patientName},</if>
+      <if test="orderInfoVo.patientPhone != null  and orderInfoVo.patientPhone != ''">#{orderInfoVo.patientPhone},</if>
+      <if test="orderInfoVo.patientGender != null  and orderInfoVo.patientGender != ''">#{orderInfoVo.patientGender},
+      </if>
+      <if test="orderInfoVo.userId != null ">#{orderInfoVo.userId},</if>
+      <if test="orderInfoVo.leaderCreateTime != null ">#{orderInfoVo.leaderCreateTime},</if>
+      <if test="orderInfoVo.leaderUpdateTime != null ">#{orderInfoVo.leaderUpdateTime},</if>
+      <if test="orderInfoVo.leaderStatus != null  and orderInfoVo.leaderStatus != ''">#{leaderStatus},</if>
+      <if test="orderInfoVo.delFlag != null  and orderInfoVo.delFlag != ''">#{orderInfoVo.delFlag},</if>
+      <if test="orderInfoVo.orderSort != null ">#{orderInfoVo.orderSort},</if>
+      <if test="orderInfoVo.userName != null  and orderInfoVo.userName != ''">#{orderInfoVo.userName},</if>
+      <if test="orderInfoVo.nodeKey != null  and orderInfoVo.nodeKey != ''">#{orderInfoVo.nodeKey},</if>
+    </trim>
+  </insert>
+
+  <!--检测订单分配-->
+  <update id="updateExperimentOrder" parameterType="com.lims.project.experiment.domain.OrderInfoDto">
+    update t_experiment_order
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="userId != null ">user_id = #{userId},</if>
+      <if test="userName != null ">user_name= #{userName},</if>
+      <if test="leaderUpdateTime != null ">leader_update_time = #{leaderUpdateTime},</if>
+      <if test="leaderStatus != null  and leaderStatus != ''">leader_status = #{leaderStatus},</if>
+    </trim>
+    where experiment_order_id = #{experimentOrderId}
+  </update>
+
+  <delete id="deleteExperimentOrderById" parameterType="Long">
+    delete
+    from t_experiment_order
+    where experiment_order_id = #{experimentOrderId}
+  </delete>
+
+  <delete id="deleteExperimentOrderByIds" parameterType="String">
+    delete from t_experiment_order where experiment_order_id in
+    <foreach item="experimentOrderId" collection="array" open="(" separator="," close=")">
+      #{experimentOrderId}
+    </foreach>
+  </delete>
+  <!--根据服务单号查询检测订单信息-->
+  <select id="selectByExperimentCode" parameterType="String" resultMap="ExperimentOrderResult">
+    <include refid="selectExperimentOrderVo"/>
+    where del_flag='0' and experiment_code = #{experimentCode}
+  </select>
+
+  <!--删除数据-->
+  <update id="updatedelFlag" parameterType="String">
+    update t_experiment_order
+    set del_flag = '2'
+    where experiment_code = #{experimentCode}
+  </update>
+
+  <!--查询导出列表-->
+  <select id="selectExportList" resultMap="resultOrderVo">
+    <include refid="selectExperimentOrderVo"/>
+    <where>
+      del_flag=0
+      and experiment_order_id in
+      <foreach collection="experimentOrderIds" item="experimentOrderId" index="index" open="(" close=")" separator=",">
+        #{experimentOrderId}
+      </foreach>
+    </where>
+  </select>
+
+  <!--回退-->
+  <update id="updateBack" parameterType="com.lims.project.experiment.domain.OrderInfoDto">
+    update t_experiment_order
+    <trim prefix="SET" suffixOverrides=",">
+      user_id = #{userId},
+      user_name = #{userName},
+      <if test="leaderUpdateTime != null ">leader_update_time = #{leaderUpdateTime},</if>
+      <if test="leaderStatus != null  and leaderStatus != ''">leader_status = #{leaderStatus},</if>
+    </trim>
+    where experiment_order_id = #{experimentOrderId}
+  </update>
+
+  <select id="selectExperimentOrderByOrderCode" parameterType="string" resultMap="resultOrderVo">
+    <include refid="selectExperimentOrderVo"/>
+    where order_code = #{orderCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.experiment.mapper.OriginSamplesMapper">
+
+    <resultMap type="OriginSamplesDto" id="OriginSamplesResult">
+        <result property="origin_id"    column="originId"    />
+        <result property="orderCode"    column="order_code"    />
+        <result property="goodsCode"    column="goods_code"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="experimentCode"    column="experiment_code"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="originTubeCode"    column="origin_tubeCode"    />
+        <result property="sampleVessel"    column="sample_vessel"    />
+        <result property="sampleType"    column="sampleType"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="sampleCode"    column="sample_code"    />
+        <result property="receiveRemarks"    column="receive_remarks"    />
+        <result property="sampleStatus"    column="sample_status"    />
+        <result property="natureState"    column="nature_state"    />
+
+    </resultMap>
+
+    <sql id="OriginSamplesResultVo">
+        select  origin_id, order_code, goods_code,
+        goods_name, experiment_code, update_time,
+         origin_tubeCode, sample_vessel, sampleType, type_name, sample_code, receive_remarks,
+         sample_status, nature_state, origin_create_time,
+         origin_update_time from  t_originsamples
+    </sql>
+
+
+    <insert id="inserOrigSamples" parameterType="OriginSamplesDto" useGeneratedKeys="true" keyProperty="id">
+        insert into t_originsamples
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderCode != null ">order_code,</if>
+            <if test="goodsCode != null  and goodsCode != ''">goods_code,</if>
+            <if test="goodsName != null ">goods_name,</if>
+            <if test="experimentCode != null  and experimentCode != ''">experiment_code,</if>
+            <if test="updateTime != null  and updateTime != ''">update_time,</if>
+            <if test="originTubeCode != null  and originTubeCode != ''">origin_tubeCode,</if>
+            <if test="sampleVessel != null  and sampleVessel != ''">sample_vessel,</if>
+            <if test="sampleType != null  and sampleType != ''">sampleType,</if>
+            <if test="typeName != null  and typeName != ''">type_name,</if>
+            <if test="sampleCode != null  and sampleCode != ''">sample_code,</if>
+            <if test="receiveRemarks != null  and receiveRemarks != ''">receive_remarks,</if>
+            <if test="sampleStatus != null  and sampleStatus != ''">sample_status,</if>
+            <if test="natureState != null  and natureState != ''">nature_state,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderCode != null ">#{orderCode},</if>
+            <if test="goodsCode != null  and goodsCode != ''">#{goodsCode},</if>
+            <if test="goodsName != null ">#{goodsName},</if>
+            <if test="experimentCode != null  and experimentCode != ''">#{experimentCode},</if>
+            <if test="updateTime != null  and updateTime != ''">#{updateTime},</if>
+            <if test="originTubeCode != null  and originTubeCode != ''">#{originTubeCode},</if>
+            <if test="sampleVessel != null  and sampleVessel != ''">#{sampleVessel},</if>
+            <if test="sampleType != null  and sampleType != ''">#{sampleType},</if>
+            <if test="typeName != null  and typeName != ''">#{typeName},</if>
+            <if test="sampleCode != null  and sampleCode != ''">#{sampleCode},</if>
+            <if test="receiveRemarks != null  and receiveRemarks != ''">#{receiveRemarks},</if>
+            <if test="sampleStatus != null  and sampleStatus != ''">#{sampleStatus},</if>
+            <if test="natureState != null  and natureState != ''">#{natureState},</if>
+        </trim>
+    </insert>
+<!--查询推送app数据方法-->
+    <select id="selectOriginSamples" parameterType="String" resultMap="OriginSamplesResult">
+        <include refid="OriginSamplesResultVo"/>
+        <where>
+            del_flag='0'
+            <if test="experimentCode != null "> and experiment_code = #{experimentCode}</if>
+        </where>
+    </select>
+</mapper>

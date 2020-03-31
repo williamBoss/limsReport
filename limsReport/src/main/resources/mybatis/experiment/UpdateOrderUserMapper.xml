@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.experiment.mapper.UpdateOrderUserMapper">
+    
+    <resultMap type="UpdateOrderUser" id="UpdateOrderUserResult">
+        <result property="id"    column="id"    />
+        <result property="experimentOrderId"    column="experiment_order_id"    />
+        <result property="leaderStatus"    column="leader_status"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+    </resultMap>
+
+    <sql id="selectUpdateOrderUserVo">
+        select id, experiment_order_id, leader_status, user_id, user_name from t_update_order_user
+    </sql>
+
+    <select id="selectUpdateOrderUser" parameterType="UpdateOrderUser" resultMap="UpdateOrderUserResult">
+        <include refid="selectUpdateOrderUserVo"/>
+        <where>
+             del_flag='0'
+            <if test="experimentOrderId != null "> and experiment_order_id = #{experimentOrderId}</if>
+            <if test="leaderStatus != null  and leaderStatus != ''"> and leader_status = #{leaderStatus}</if>
+
+        </where>
+    </select>
+    
+    <select id="selectUpdateOrderUserById" parameterType="Long" resultMap="UpdateOrderUserResult">
+        <include refid="selectUpdateOrderUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUpdateOrderUser" parameterType="UpdateOrderUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_update_order_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="experimentOrderId != null ">experiment_order_id,</if>
+            <if test="leaderStatus != null  and leaderStatus != ''">leader_status,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="experimentOrderId != null ">#{experimentOrderId},</if>
+            <if test="leaderStatus != null  and leaderStatus != ''">#{leaderStatus},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUpdateOrderUser" parameterType="UpdateOrderUser">
+        update t_update_order_user
+        set  del_flag='2'
+        where experiment_order_id=#{experimentOrderId} and leader_status=#{leaderStatus}
+    </update>
+
+    <delete id="deleteUpdateOrderUserById" parameterType="Long">
+        delete from t_update_order_user where id = #{id}
+    </delete>
+
+    <delete id="deleteUpdateOrderUserByIds" parameterType="String">
+        delete from t_update_order_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

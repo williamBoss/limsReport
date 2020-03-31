@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.upload.mapper.ExperimentOrderFileMapper">
+  <resultMap id="BaseResultMap" type="com.lims.project.upload.domain.ExperimentOrderFilePO">
+    <!--@mbg.generated-->
+    <!--@Table t_experiment_order_file-->
+    <id column="order_file_id" jdbcType="INTEGER" property="orderFileId"/>
+    <result column="experiment_order_id" jdbcType="INTEGER" property="experimentOrderId"/>
+    <result column="file_id" jdbcType="INTEGER" property="fileId"/>
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+    <result column="create_user" jdbcType="INTEGER" property="createUser"/>
+    <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_file_id, experiment_order_id, file_id, delete_flag, create_user, update_user,
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List"/>
+    from t_experiment_order_file
+    where order_file_id = #{orderFileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_experiment_order_file
+    where order_file_id = #{orderFileId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="order_file_id" keyProperty="orderFileId"
+    parameterType="com.lims.project.upload.domain.ExperimentOrderFilePO"
+    useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_experiment_order_file (experiment_order_id, file_id, delete_flag,
+    create_user, update_user, create_time,
+    update_time)
+    values (#{experimentOrderId,jdbcType=INTEGER}, #{fileId,jdbcType=INTEGER},
+    #{deleteFlag,jdbcType=INTEGER},
+    #{createUser,jdbcType=INTEGER}, #{updateUser,jdbcType=INTEGER},
+    now(),now())
+  </insert>
+  <insert id="insertSelective" keyColumn="order_file_id" keyProperty="orderFileId"
+    parameterType="com.lims.project.upload.domain.ExperimentOrderFilePO"
+    useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_experiment_order_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="experimentOrderId != null">
+        experiment_order_id,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      create_time,
+      update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="experimentOrderId != null">
+        #{experimentOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      now(),now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.lims.project.upload.domain.ExperimentOrderFilePO">
+    <!--@mbg.generated-->
+    update t_experiment_order_file
+    <set>
+      <if test="experimentOrderId != null">
+        experiment_order_id = #{experimentOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      update_time = now(),
+    </set>
+    where order_file_id = #{orderFileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey"
+    parameterType="com.lims.project.upload.domain.ExperimentOrderFilePO">
+    <!--@mbg.generated-->
+    update t_experiment_order_file
+    set experiment_order_id = #{experimentOrderId,jdbcType=INTEGER},
+    file_id = #{fileId,jdbcType=INTEGER},
+    delete_flag = #{deleteFlag,jdbcType=INTEGER},
+    update_user = #{updateUser,jdbcType=INTEGER},
+    update_time = NOW()
+    where order_file_id = #{orderFileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateDeleteFlagByExperimentOrderId" parameterType="integer">
+    update t_experiment_order_file
+    set delete_flag=1
+    where experiment_order_id = #{experimentOrderId,jdbcType=INTEGER}
+  </update>
+</mapper>

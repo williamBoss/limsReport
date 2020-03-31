@@ -1,0 +1,104 @@
+# 项目相关配置
+lims:
+  # 名称
+  name: lims
+  # 版本
+  version: 2.1.0
+  # 版权年份
+  copyrightYear: 2020
+  # 实例演示开关
+  demoEnabled: false
+  # 文件路径 示例（ Windows配置D:/lims/uploadPath，Linux配置 /home/lims/uploadPath）
+  profile: F:/limsReport/uploadPath
+  # 获取ip地址开关
+  addressEnabled: false
+  # 请求lims数据的秘钥
+  signKey: b9ca7bc2d6149a27d2a3fc0cc09c0cab
+  # 请求lims接口的时间
+  ts: 3000
+  # pdf模板路径
+  pdfTemplatePath: /home/limsReport/template/病理评估报告模板_v1.pdf
+  # e-mail账户
+  emailAccount: lims@simceredx.com
+  # email密码
+  emailPassword: limslims
+  # emailhost 要连接的SMTP服务器
+  emailHost: email.simceredx.com
+  #获取订单列表的接口地址
+  LIMS_ORDER_LIST_URL: http://30.6.0.13:5009/experimentOrder/list
+  #获取实验单实验结果详情信息接口地址
+  LIMS_ORDER_INFO_URL: http://30.6.0.13:5009/experimentResult/info
+  #订单详情地址 details
+  LIMS_ORDER_DETAILS_URL: http://30.6.0.13:5009/experimentOrder/details
+  #app推送signkey
+  appSignKey: A53BP3c2XL86r471NH7A7Z0703cwaz89
+  # app推送地址
+  appSendUrl: https://api.yoai.com/
+  # app获取报告文件接口校验key
+  appSendReportSignKey: b9ca7bc2d6149a27d2a3fc0cc09c0cab
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8089
+  servlet:
+    # 应用的访问路径
+    context-path: /
+
+# 数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      # 主库数据源
+      master:
+        url: jdbc:mysql://47.100.221.10:3306/waiguadata?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: MySql5.7
+      # 从库数据源
+      slave:
+        # 从数据源开关/默认关闭
+        enabled: false
+        url:
+        username:
+        password:
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username:
+        login-password:
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true

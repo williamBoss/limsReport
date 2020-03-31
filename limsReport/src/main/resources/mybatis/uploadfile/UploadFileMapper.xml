@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lims.project.upload.mapper.UploadFileMapper">
+    <resultMap id="BaseResultMap" type="com.lims.project.upload.domain.UploadFilePO">
+        <!--@mbg.generated-->
+        <!--@Table t_upload_file-->
+        <id column="file_id" jdbcType="INTEGER" property="fileId"/>
+        <result column="origin_file_name" jdbcType="VARCHAR" property="originFileName"/>
+        <result column="new_file_name" jdbcType="VARCHAR" property="newFileName"/>
+        <result column="save_path" jdbcType="VARCHAR" property="savePath"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+        <result column="create_user" jdbcType="INTEGER" property="createUser"/>
+        <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        file_id, origin_file_name, new_file_name, save_path, delete_flag, create_user, update_user,
+        create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_upload_file
+        where file_id = #{fileId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from t_upload_file
+        where file_id = #{fileId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="file_id" keyProperty="fileId"
+            parameterType="com.lims.project.upload.domain.UploadFilePO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_upload_file (origin_file_name, new_file_name, save_path,
+        delete_flag, create_user, update_user, create_time, update_time)
+        values (#{originFileName,jdbcType=VARCHAR}, #{newFileName,jdbcType=VARCHAR}, #{savePath,jdbcType=VARCHAR},
+        #{deleteFlag,jdbcType=INTEGER}, #{createUser,jdbcType=INTEGER}, #{updateUser,jdbcType=INTEGER},now(),now())
+    </insert>
+    <insert id="insertSelective" keyColumn="file_id" keyProperty="fileId"
+            parameterType="com.lims.project.upload.domain.UploadFilePO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_upload_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="originFileName != null and originFileName != ''">
+                origin_file_name,
+            </if>
+            <if test="newFileName != null and newFileName != ''">
+                new_file_name,
+            </if>
+            <if test="savePath != null and savePath != ''">
+                save_path,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="originFileName != null and originFileName != ''">
+                #{originFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="newFileName != null and newFileName != ''">
+                #{newFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="savePath != null and savePath != ''">
+                #{savePath,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lims.project.upload.domain.UploadFilePO">
+        <!--@mbg.generated-->
+        update t_upload_file
+        <set>
+            <if test="originFileName != null and originFileName != ''">
+                origin_file_name = #{originFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="newFileName != null and newFileName != ''">
+                new_file_name = #{newFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="savePath != null and savePath != ''">
+                save_path = #{savePath,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where file_id = #{fileId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lims.project.upload.domain.UploadFilePO">
+        <!--@mbg.generated-->
+        update t_upload_file
+        set origin_file_name = #{originFileName,jdbcType=VARCHAR},
+        new_file_name = #{newFileName,jdbcType=VARCHAR},
+        save_path = #{savePath,jdbcType=VARCHAR},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        create_user = #{createUser,jdbcType=INTEGER},
+        update_user = #{updateUser,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where file_id = #{fileId,jdbcType=INTEGER}
+    </update>
+
+    <!--根据订单-->
+    <select id="selectByPrimarOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select fl.* from t_upload_file fl
+        inner join t_experiment_order_file ofile on ofile.file_id=fl.file_id
+        WHERE ofile.delete_flag=0 and experiment_order_id = #{fexperimentOrderId}
+    </select>
+
+</mapper>
