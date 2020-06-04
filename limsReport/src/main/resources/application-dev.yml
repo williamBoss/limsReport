@@ -25,15 +25,15 @@ lims:
   # emailhost 要连接的SMTP服务器
   emailHost: email.simceredx.com
   #获取订单列表的接口地址
-  LIMS_ORDER_LIST_URL: http://30.6.0.13:5009/experimentOrder/list
+  LIMS_ORDER_LIST_URL: http://ip:5009/experimentOrder/list
   #获取实验单实验结果详情信息接口地址
-  LIMS_ORDER_INFO_URL: http://30.6.0.13:5009/experimentResult/info
+  LIMS_ORDER_INFO_URL: http://ip:5009/experimentResult/info
   #订单详情地址 details
-  LIMS_ORDER_DETAILS_URL: http://30.6.0.13:5009/experimentOrder/details
+  LIMS_ORDER_DETAILS_URL: http://ip:5009/experimentOrder/details
   #app推送signkey
   appSignKey: A53BP3c2XL86r471NH7A7Z0703cwaz89
   # app推送地址
-  appSendUrl: https://api.yoai.com/
+  appSendUrl: https://ip/
   # app获取报告文件接口校验key
   appSendReportSignKey: b9ca7bc2d6149a27d2a3fc0cc09c0cab
 
@@ -53,9 +53,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://47.100.221.10:3306/waiguadata?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://ip:3306/waiguadata?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
-        password: MySql5.7
+        password: root
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
